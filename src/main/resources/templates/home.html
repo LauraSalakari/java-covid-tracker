@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<!--using the Thymeleaf namespace that allows us to use its syntax-->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Covid-19 Tracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+</head>
+
+<body>
+
+<!--Note the syntax: (The text inside the tags, "placeholder" gets rendered if no applicable data is passed in the model-->
+<!--<p th:text="${testName}">Placeholder</p>-->
+<div class="container" >
+    <h1 style="text-align:center">Covid-19 Tracker</h1>
+    <p style="text-align:center">Track the reported cases of Covid-19 across the world.</p>
+
+    <div class="jumbotron" style="text-align:center">
+        <h2 th:text="${totalReportedCases}"></h2>
+        <p>Total cases reported as of today</p>
+        <hr class="my-4">
+        <p>New cases since previous day: <b><span th:text="${changeInCases}"></span></b></p>
+    </div>
+
+    <table class="table">
+        <tr>
+            <th>Country</th>
+            <th>State/Province</th>
+            <th>Total Cases Reported</th>
+            <th>Changes from Previous Day</th>
+        </tr>
+        <!-- use an enhanced for loop to create a table! -->
+        <tr th:each="locationStat : ${locationStats}">
+            <td th:text="${locationStat.country}"></td>
+            <td th:text="${locationStat.state}"></td>
+            <td th:text="${locationStat.latestTotalCases}">0</td>
+            <td th:text="${locationStat.diffFromPrevDay}">0</td>
+
+        </tr>
+    </table>
+</div>
+
+</body>
+
+</html>
